@@ -1,0 +1,148 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "Untitled33.ipynb",
+      "provenance": [],
+      "authorship_tag": "ABX9TyMfzkj3e3RMzAVo3daecGUs",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/shaon11579/2022-spring-NLP-/blob/main/nlp%20A1\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\n",
+        "\n",
+        "import string\n",
+        "from string import punctuation\n",
+        "# Count the words in the file\n",
+        "with open(\"/nlpa1.txt\", \"r\") as fhand:\n",
+        "    lines = fhand.readlines()\n",
+        "counts = {}\n",
+        "table = str.maketrans(\"\", \"\", string.punctuation)\n",
+        "for line in lines:\n",
+        "    line = line.translate(table)\n",
+        "    for word in line.split():\n",
+        "        if word not in counts.keys():\n",
+        "            counts[word] = 1\n",
+        "        else:\n",
+        "            counts[word] += 1\n",
+        "\n",
+        "# Sort the dictionary by value\n",
+        "sorted_counts = sorted(counts.items(), key = lambda t: t[1], reverse = True)\n",
+        "\n",
+        "# print the top ten\n",
+        "for t in sorted_counts[:10]:\n",
+        "    print(t)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "Zh8loTd82iXe",
+        "outputId": "8253fc10-932e-4f2f-c652-588fa09797da"
+      },
+      "execution_count": 17,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "('the', 6)\n",
+            "('of', 5)\n",
+            "('are', 3)\n",
+            "('have', 3)\n",
+            "('whales', 3)\n",
+            "('dolphins', 2)\n",
+            "('in', 2)\n",
+            "('whale', 2)\n",
+            "('to', 2)\n",
+            "('as', 2)\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "    for i in fhand:\n",
+        "      \n",
+        "    # checking whether the char is punctuation.\n",
+        "    if i in string.punctuation:\n",
+        "          \n",
+        "        # Printing the punctuation values \n",
+        "      print(\"Punctuation: \" + i)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 131
+        },
+        "id": "pdV_mSfZ9dp8",
+        "outputId": "3fb97e1a-e552-4c00-f42c-b5b7ee4b9bc3"
+      },
+      "execution_count": 22,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "IndentationError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;36m  File \u001b[0;32m\"<ipython-input-22-1d3f2f5f18ab>\"\u001b[0;36m, line \u001b[0;32m4\u001b[0m\n\u001b[0;31m    if i in string.punctuation:\u001b[0m\n\u001b[0m     ^\u001b[0m\n\u001b[0;31mIndentationError\u001b[0m\u001b[0;31m:\u001b[0m expected an indented block\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "count = 0;  \n",
+        "str = \"/nlpa1.txt\";  \n",
+        "for i in range (0, len (str)):   \n",
+        "    #Checks whether given character is a punctuation mark  \n",
+        "    if str[i] in ('!', \",\" ,\"\\'\" ,\";\" ,\"\\\"\", \".\", \"-\" ,\"?\"):  \n",
+        "        count = count + 1;  \n",
+        "          \n",
+        "print (\"Total number of punctuation characters exists in string: \");  \n",
+        "print (count);  "
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "zCHLVmGI6x-C",
+        "outputId": "b2fe5d4e-1bce-487d-c301-338453579c8e"
+      },
+      "execution_count": 15,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Total number of punctuation characters exists in string: \n",
+            "1\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
