@@ -1,0 +1,108 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "Untitled34.ipynb",
+      "provenance": [],
+      "authorship_tag": "ABX9TyOQzcmFgCe3LSH8BQR/TP9Y",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/shaon11579/2022-spring-NLP-/blob/main/assignment%201%20updated%20\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "iUoyFO5_fXnY",
+        "outputId": "01234f5c-6917-4ed9-c9b7-c1d08048d359"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Counter({',': 9, 'the': 6, 'of': 5, '.': 5, 'whales': 4, 'are': 3, '-': 3, 'have': 3, 'for': 3, 'dolphins': 2, 'in': 2, 'they': 2, 'whale': 2, 'to': 2, 'as': 2, '\"': 2, 'and': 2, 'marine': 1, 'mammals': 1, 'order': 1, 'cetacea': 1, 'which': 1, 'neither': 1, 'members': 1, 'other': 1, 'words': 1, 'families': 1, 'delphinidae': 1, 'or': 1, 'platanistoidae': 1, 'nor': 1, 'porpoises': 1, 'include': 1, 'blue': 1, 'largest': 1, 'animal': 1, 'ever': 1, 'lived': 1, 'orcas': 1, 'colloquially': 1, 'referred': 1, 'killer': 1, 'whales\"': 1, 'pilot': 1, 'their': 1, 'name': 1, 'but': 1, 'purpose': 1, 'classification': 1, 'actually': 1, 'centuries': 1, 'been': 1, 'hunted': 1, 'meat': 1, 'a': 1, 'source': 1, 'valuable': 1, 'raw': 1, 'materials': 1, 'by': 1, 'middle': 1, '20th': 1, 'century': 1, 'large': 1, 'scale': 1, 'industrial': 1, 'whaling': 1, 'had': 1, 'left': 1, 'many': 1, 'populations': 1, 'severely': 1, 'depleted': 1, 'rendering': 1, 'certain': 1, 'species': 1, 'seriously': 1, 'endangered': 1})\n",
+            "The ten most common words are: \n",
+            ",\n",
+            "the\n",
+            "of\n",
+            ".\n",
+            "whales\n",
+            "are\n",
+            "-\n",
+            "have\n",
+            "for\n",
+            "dolphins\n"
+          ]
+        }
+      ],
+      "source": [
+        "import string\n",
+        "from functools import reduce\n",
+        "from collections import Counter\n",
+        "file_name = \"/nlpa1.txt\"\n",
+        "input_string = \"\"\n",
+        "\n",
+        "def get_input_string(file_name):\n",
+        "    input_string = \"\"\n",
+        "    with open(file_name,'r') as f:\n",
+        "        input_string = input_string + f.read().replace(\"\\n\",\" \")\n",
+        "    return input_string\n",
+        "\n",
+        "def get_words(input_string):\n",
+        "    words = list(map(lambda x:str(x).strip(),input_string.split()))\n",
+        "    return words\n",
+        "\n",
+        "def individual_word_process(x,punc_list):\n",
+        "    punc_list = [i for i in punc_list if i in x]\n",
+        "    if len(punc_list) == 0:\n",
+        "        return [x]\n",
+        "    else:\n",
+        "        word = []\n",
+        "        for punc in punc_list:\n",
+        "            word.extend(x.split(punc))\n",
+        "            word.append(punc)\n",
+        "            word = list(filter(lambda x:x != '',word))\n",
+        "        return word\n",
+        "\n",
+        "\n",
+        "def include_punctuation(words,punc_list):\n",
+        "    words = list(map(lambda x:individual_word_process(x,punc_list),words))\n",
+        "    words = list(reduce(lambda x,y: x+y,words))\n",
+        "    return words\n",
+        "\n",
+        "input_string = get_input_string(file_name)\n",
+        "temp_words = get_words(input_string)\n",
+        "punc_list = list(string.punctuation)\n",
+        "final_word_list = include_punctuation(temp_words,punc_list)\n",
+        "final_word_list = list(map(lambda x:str(x).lower(),final_word_list))\n",
+        "ten_words = Counter(final_word_list).most_common(10)\n",
+        "print(Counter(final_word_list))\n",
+        "print(\"The ten most common words are: \")\n",
+        "for u,v in ten_words:\n",
+        "    print(u)"
+      ]
+    }
+  ]
+}
